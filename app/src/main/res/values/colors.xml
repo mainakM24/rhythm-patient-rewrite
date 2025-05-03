@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#056ac8</color>
+    <color name="background">#000000</color>
+    <color name="body_background">#191919</color>
+    <color name="nav_background">#2e3439</color>
+    <color name="input_background">#353535</color>
+    <color name="table_header">#252525</color>
+    <color name="table_background">#2f2f2f</color>
+    <color name="advice_background">#444444</color>
+    <color name="link">#2196F3</color>
+</resources>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.SessionDetailsFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:background="@color/table_header"
+            android:text="@string/detailed_session_table_title"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tl_detailed_session_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@color/table_background">
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/details"
+                        android:padding="6dp"/>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/start_session_time"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/end_session_time"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/total_analyzed_duration"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/total_analyzed_beat"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/bpm_average"
+                        android:padding="6dp"/>
+
+                </TableRow>
+            </TableLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/table_header"
+            android:text="@string/anomaly_distribution_chart_title"/>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pc_anomaly_distribution"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/table_header"
+            android:text="@string/session_anomaly_distribution_chart_title"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bc_anomaly_distribution"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/version"
+            android:layout_marginTop="3dp"
+            android:padding="8dp"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

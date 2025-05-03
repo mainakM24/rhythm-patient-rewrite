@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.MyDetailsFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <TableLayout
+            android:id="@+id/tl_my_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/table_background"
+            android:layout_margin="12dp"
+            android:padding="6dp"
+            android:stretchColumns="*"
+            android:shrinkColumns="*"
+            >
+            <TextView
+                android:text="@string/my_information"
+                android:background="@color/table_header"
+                android:padding="12dp"
+                android:textSize="@dimen/large_text"
+                android:textStyle="bold"/>
+        </TableLayout>
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp">
+            <TableLayout
+                android:id="@+id/tl_doctor_assigned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/table_background"
+                android:padding="6dp"
+                android:stretchColumns="*">
+                <TextView
+                    android:text="@string/doc_table_title"
+                    android:background="@color/table_header"
+                    android:padding="12dp"
+                    android:textSize="@dimen/large_text"
+                    android:textStyle="bold"/>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/doctor_id"
+                        android:padding="6dp"/>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/doctor_s_name"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/admission_date"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/hospital_name"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/hospital_boarding_id"
+                        android:padding="6dp"/>
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_doctor_id"
+                        android:layout_gravity="center"
+                        android:padding="6dp"/>
+                    <TextView
+                        android:id="@+id/tv_doctor_name"
+                        android:layout_gravity="center"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_admission_date"
+                        android:layout_gravity="center"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_hospital_name"
+                        android:layout_gravity="center"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_boarding_id"
+                        android:layout_gravity="center"
+                        android:padding="6dp"/>
+                </TableRow>
+            </TableLayout>
+        </HorizontalScrollView>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/table_background"
+            android:layout_margin="12dp"
+            android:padding="6dp">
+            <TextView
+                android:text="@string/device_table_title"
+                android:background="@color/table_header"
+                android:padding="12dp"
+                android:textSize="@dimen/large_text"
+                android:textStyle="bold"/>
+            <TextView
+                android:padding="12dp"
+                android:text="@string/no_device_message"
+                />
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/table_background"
+            android:layout_margin="12dp"
+            android:padding="6dp">
+            <TextView
+                android:text="@string/notes_table_title"
+                android:background="@color/table_header"
+                android:padding="12dp"
+                android:textSize="@dimen/large_text"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:padding="12dp"
+                android:id="@+id/tv_notes"/>
+        </TableLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:background="@color/table_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/advice_table_title"
+                android:background="@color/table_header"
+                android:padding="12dp"
+                android:layout_margin="6dp"
+                android:textSize="@dimen/large_text"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_advice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <TextView
+                android:id="@+id/tv_load_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/load_more"
+                android:textColor="@color/link"
+                android:layout_margin="3dp"
+                android:background="@color/table_header"
+                android:padding="4dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.CheckReportFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:background="@color/table_header"
+            android:text="@string/session_table_title"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tl_session_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@color/table_background">
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/session_id"
+                        android:padding="6dp"/>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/start_date"
+
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/end_date"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/total_analyzed_duration"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/total_analyzed_beat"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/bpm_minimum"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/bpm_median"
+                        android:padding="6dp"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/bpm_maximum"
+                        android:padding="6dp"/>
+
+                </TableRow>
+
+            </TableLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text"
+            android:background="@color/table_header"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/bpm_analysis_chart_title"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bc_bpm_analysis"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text"
+            android:background="@color/table_header"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/anomaly_distribution_chart_title"/>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pc_anomaly_distribution"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text"
+            android:background="@color/table_header"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/session_anomaly_distribution_chart_title"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bc_anomaly_distribution"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/version"
+            android:layout_marginTop="3dp"
+            android:padding="8dp"/>
+    </LinearLayout>
+</ScrollView>

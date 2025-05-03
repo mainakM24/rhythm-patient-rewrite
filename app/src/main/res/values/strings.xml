@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">RhythmApp</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_signin">Sign In</string>
+    <string name="login_remember_me">Remember Me</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="nav_change_password">Change password</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_my_details">My Details</string>
+    <string name="nav_check_report">Check Report</string>
+    <string name="nav_log_out">Log Out</string>
+    <string name="version">Version: 1.0</string>
+
+
+    <string name="home_page_text">Rhythm is a platform which is connected to smart IoT devices.
+        The IoT devices helps to capture real-time ECG data. These devices are small and lightweight,
+        making it easy for patients to wear for extended period without discomfort.
+        \n\nThe devices use machine learning algorithms trained on standard databases alongside
+        real-time geriatric patients, ensuring the most accurate diagnosis possible. The smart devices
+        generate comparative reports that provide a quick evaluation of the patient’s cardiac health.
+        \n\nThrough Rhythm platform, these reports can be accessed by healthcare professionals at anytime
+        from anywhere, facilitating quick advice and timely intervention if needed.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_information">My Information</string>
+    <string name="doc_table_title">Doctor Assigned To Me</string>
+    <string name="doctor_id">Doctor Id</string>
+    <string name="doctor_s_name">Doctor\'s name</string>
+    <string name="admission_date">Admission Date</string>
+    <string name="hospital_name">Hospital name</string>
+    <string name="hospital_boarding_id">Hospital boarding Id</string>
+    <string name="device_table_title">Device Assigned to me</string>
+    <string name="notes_table_title">Notes</string>
+    <string name="no_device_message">Patient has not been assigned any device.</string>
+    <string name="advice_table_title">Advice logged by doctor</string>
+    <string name="load_more">Load More</string>
+    <string name="session_id">Session ID</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="total_analyzed_duration">Total Analysed Duration(in min)</string>
+    <string name="total_analyzed_beat">Total Analyzed Beat</string>
+    <string name="bpm_minimum">BPM Minimum</string>
+    <string name="bpm_median">BPM Median</string>
+    <string name="bpm_maximum">BPM Maximum</string>
+    <string name="session_table_title">Patient Session List</string>
+    <string name="bpm_analysis_chart_title">BPM Analysis Session Wise</string>
+    <string name="anomaly_distribution_chart_title">Overall Anomaly Distribution</string>
+    <string name="session_anomaly_distribution_chart_title">Anomaly Distribution - Session wise</string>
+    <string name="detailed_session_table_title">Detailed Session List</string>
+    <string name="details">Details</string>
+    <string name="start_session_time">Start Session Time</string>
+    <string name="end_session_time">End Session Time</string>
+    <string name="bpm_average">BPM Average</string>
+    <string name="granular_session_table_title">Granular Session List</string>
+    <string name="ecg_signal_chart_title">ECG Signal</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+</resources>
