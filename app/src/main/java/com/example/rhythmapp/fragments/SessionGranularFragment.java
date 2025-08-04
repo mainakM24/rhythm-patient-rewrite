@@ -398,6 +398,9 @@ public class SessionGranularFragment extends Fragment {
         binding.lcEcg.invalidate();
         binding.lcEcg.setVisibility(View.VISIBLE);
         binding.tvEcgChartTitle.setVisibility(View.VISIBLE);
+
+        binding.tvGranularPath.setVisibility(View.GONE);
+        binding.tvEcgPath.setVisibility(View.VISIBLE);
     }
 
 }

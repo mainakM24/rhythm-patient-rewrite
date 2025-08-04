@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +14,8 @@ import com.example.rhythmapp.api.RetrofitClient;
 import com.example.rhythmapp.databinding.ActivityLoginBinding;
 import com.example.rhythmapp.models.ApiResponse;
 import com.example.rhythmapp.models.Patient;
+import com.example.rhythmapp.utils.NetworkState;
 
-import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -39,6 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         if (remembered){
             startActivity(intent);
             finish();
+        }
+
+        //checking internet connection
+        if (!NetworkState.isNetworkAvailable(this)) {
+            Toast.makeText(this, "Turn On Internet", Toast.LENGTH_LONG).show();
         }
 
         //clicking sign in button
@@ -91,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("api", "onFailure: ", throwable);
                 }
             });
-
         });
     }
 }

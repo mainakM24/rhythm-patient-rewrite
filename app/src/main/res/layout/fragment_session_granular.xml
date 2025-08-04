@@ -12,6 +12,24 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_granular_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:textColor="@color/material_dynamic_neutral_variant50"
+            android:visibility="visible"
+            android:text="@string/granular_session_path"/>
+
+        <TextView
+            android:id="@+id/tv_ecg_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:textColor="@color/material_dynamic_neutral_variant50"
+            android:visibility="gone"
+            android:text="@string/ecg_session_path"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/large_text"

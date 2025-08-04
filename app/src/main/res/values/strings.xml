@@ -56,4 +56,8 @@
     <string name="ecg_signal_chart_title">ECG Signal</string>
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
+    <string name="sessions_path">Sessions /</string>
+    <string name="detailed_session_path">Sessions / Detailed Session</string>
+    <string name="granular_session_path">Sessions / Detailed Session / Granular Session</string>
+    <string name="ecg_session_path">Sessions / Detailed Session / Granular Session / ECG</string>
 </resources>
