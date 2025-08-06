@@ -2,6 +2,7 @@ package com.example.rhythmapp.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.Manifest;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,8 +10,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +29,7 @@ import com.example.rhythmapp.api.RetrofitClient;
 import com.example.rhythmapp.databinding.FragmentCheckReportBinding;
 import com.example.rhythmapp.models.ApiResponse;
 import com.example.rhythmapp.models.Session;
+import com.example.rhythmapp.utils.PdfUtil;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -53,7 +58,7 @@ public class CheckReportFragment extends Fragment {
 
 
     private FragmentCheckReportBinding binding;
-    private List<Session> sessionList = new ArrayList<>(); // Initialize to avoid null
+    private List<Session> sessionList = new ArrayList<>();
     private String userId;
     private boolean dataLoaded = false; // Track if data has been loaded
 
@@ -79,13 +84,15 @@ public class CheckReportFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Only fetch data if it hasn't been loaded or if sessionList is empty
         if (!dataLoaded || sessionList.isEmpty()) {
             fetchSessionData();
         } else {
-            // If we already have data, just redisplay it
-            displayData();
+            displayData(); // If we already have data, just redisplay it
         }
+
+        binding.btPdf.setOnClickListener(view1 -> {
+            downloadPdf();
+        });
     }
 
     private void fetchSessionData() {
@@ -96,7 +103,7 @@ public class CheckReportFragment extends Fragment {
 
         sessionApiResponseCall.enqueue(new Callback<ApiResponse<Session>>() {
             @Override
-            public void onResponse(Call<ApiResponse<Session>> call, Response<ApiResponse<Session>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<Session>> call, @NonNull Response<ApiResponse<Session>> response) {
                 // Always check if fragment is still attached to context
                 if (!isAdded() || binding == null) return;
 
@@ -114,7 +121,7 @@ public class CheckReportFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<Session>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<Session>> call, @NonNull Throwable throwable) {
                 // Always check if fragment is still attached to context
                 if (!isAdded() || binding == null) return;
 
@@ -443,5 +450,18 @@ public class CheckReportFragment extends Fragment {
         binding.bcAnomalyDistribution.invalidate();
     }
 
+    private void downloadPdf() {
+        binding.btPdf.setVisibility(View.INVISIBLE);
+        Toast.makeText(requireContext(), "Downloading pdf...", Toast.LENGTH_SHORT).show();
+        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1232);
+        PdfUtil.createPdfFromCurrentScreen(binding.scrollView);
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            binding.scrollView.requestLayout();
+        }, 500);
+
+        Toast.makeText(requireContext(), "Downloaded", Toast.LENGTH_SHORT).show();
+        binding.btPdf.setVisibility(View.VISIBLE);
+    }
 }
 

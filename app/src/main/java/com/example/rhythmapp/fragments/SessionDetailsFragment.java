@@ -2,6 +2,7 @@ package com.example.rhythmapp.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.Manifest;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,8 +10,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +30,7 @@ import com.example.rhythmapp.databinding.FragmentSessionDetailsBinding;
 import com.example.rhythmapp.models.ApiResponse;
 import com.example.rhythmapp.models.DetailedSession;
 import com.example.rhythmapp.models.Session;
+import com.example.rhythmapp.utils.PdfUtil;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -94,6 +99,8 @@ public class SessionDetailsFragment extends Fragment {
 
             displayData();
         }
+
+        binding.btPdf.setOnClickListener(view1 -> downloadPdf());
     }
 
     @Override
@@ -348,5 +355,19 @@ public class SessionDetailsFragment extends Fragment {
                 .replace(R.id.frame_layout, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private void downloadPdf() {
+        binding.btPdf.setVisibility(View.INVISIBLE);
+        Toast.makeText(requireContext(), "Downloading pdf...", Toast.LENGTH_SHORT).show();
+        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1232);
+        PdfUtil.createPdfFromCurrentScreen(binding.scrollView);
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            binding.scrollView.requestLayout();
+        }, 500);
+
+        Toast.makeText(requireContext(), "Downloaded", Toast.LENGTH_SHORT).show();
+        binding.btPdf.setVisibility(View.VISIBLE);
     }
 }

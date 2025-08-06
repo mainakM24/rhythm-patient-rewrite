@@ -5,7 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 
-public class NetworkState {
+public class NetworkUtil {
     public static boolean isNetworkAvailable(Context context) {
         if (context == null) {
             return false;

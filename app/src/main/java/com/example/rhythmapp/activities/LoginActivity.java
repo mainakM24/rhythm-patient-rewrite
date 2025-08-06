@@ -14,7 +14,7 @@ import com.example.rhythmapp.api.RetrofitClient;
 import com.example.rhythmapp.databinding.ActivityLoginBinding;
 import com.example.rhythmapp.models.ApiResponse;
 import com.example.rhythmapp.models.Patient;
-import com.example.rhythmapp.utils.NetworkState;
+import com.example.rhythmapp.utils.NetworkUtil;
 
 import java.util.Objects;
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //checking internet connection
-        if (!NetworkState.isNetworkAvailable(this)) {
+        if (!NetworkUtil.isNetworkAvailable(this)) {
             Toast.makeText(this, "Turn On Internet", Toast.LENGTH_LONG).show();
         }
 

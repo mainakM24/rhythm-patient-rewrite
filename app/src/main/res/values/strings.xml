@@ -60,4 +60,5 @@
     <string name="detailed_session_path">Sessions / Detailed Session</string>
     <string name="granular_session_path">Sessions / Detailed Session / Granular Session</string>
     <string name="ecg_session_path">Sessions / Detailed Session / Granular Session / ECG</string>
+    <string name="download_report">Download Report</string>
 </resources>
