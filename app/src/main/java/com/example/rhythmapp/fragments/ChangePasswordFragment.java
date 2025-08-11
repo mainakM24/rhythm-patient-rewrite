@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.rhythmapp.R;
 import com.example.rhythmapp.api.ApiService;
 import com.example.rhythmapp.api.RetrofitClient;
 import com.example.rhythmapp.databinding.FragmentChangePasswordBinding;
@@ -45,7 +44,7 @@ public class ChangePasswordFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentChangePasswordBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -55,31 +54,28 @@ public class ChangePasswordFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                oldPassword = binding.etOldPass.getText().toString().trim();
-                newPassword = binding.etNewPassword.getText().toString().trim();
+        binding.btChangePassword.setOnClickListener(view1 -> {
+            oldPassword = binding.etOldPass.getText().toString().trim();
+            newPassword = binding.etNewPassword.getText().toString().trim();
 
-                apiService = RetrofitClient.getApiService();
-                Call<Void> call = apiService.changePassword(userId, oldPassword, newPassword);
+            apiService = RetrofitClient.getApiService();
+            Call<Void> call = apiService.changePassword(userId, oldPassword, newPassword);
 
-                call.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()){
-                            Toast.makeText(getContext(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
-                        }
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                    if (response.isSuccessful()){
+                        Toast.makeText(getContext(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable throwable) {
+                @Override
+                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
 
-                    }
-                });
-            }
+                }
+            });
         });
 
 

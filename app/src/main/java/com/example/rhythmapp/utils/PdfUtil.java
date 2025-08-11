@@ -1,6 +1,5 @@
 package com.example.rhythmapp.utils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,8 +17,8 @@ public class PdfUtil {
 
         PdfDocument pdfDocument = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(
-                screenBitmap.getWidth(),
-                screenBitmap.getHeight(),
+                (int) (screenBitmap.getWidth() * 0.7F),
+                (int) (screenBitmap.getHeight() * 0.7F),
                 1
         ).create();
         PdfDocument.Page page = pdfDocument.startPage(pageInfo);
@@ -50,6 +49,7 @@ public class PdfUtil {
                 Bitmap.Config.ARGB_8888
         );
         Canvas canvas = new Canvas(bitmap);
+        canvas.scale(0.7F, 0.7F);
         view.draw(canvas);
         return bitmap;
     }

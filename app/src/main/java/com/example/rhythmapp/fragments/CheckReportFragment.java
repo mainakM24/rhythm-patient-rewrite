@@ -90,9 +90,7 @@ public class CheckReportFragment extends Fragment {
             displayData(); // If we already have data, just redisplay it
         }
 
-        binding.btPdf.setOnClickListener(view1 -> {
-            downloadPdf();
-        });
+        binding.btPdf.setOnClickListener(view1 -> downloadPdf());
     }
 
     private void fetchSessionData() {
@@ -192,9 +190,7 @@ public class CheckReportFragment extends Fragment {
 
         textViews[0].setTextColor(getResources().getColor(R.color.link, requireContext().getTheme()));
         textViews[0].setTypeface(null, Typeface.BOLD);
-        textViews[0].setOnClickListener(v -> {
-            navigateToSessionDetailsFragment(session.getSession_id());
-        });
+        textViews[0].setOnClickListener(v -> navigateToSessionDetailsFragment(session.getSession_id()));
 
         binding.tlSessionList.addView(tableRow);
     }
@@ -456,9 +452,7 @@ public class CheckReportFragment extends Fragment {
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1232);
         PdfUtil.createPdfFromCurrentScreen(binding.scrollView);
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            binding.scrollView.requestLayout();
-        }, 500);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> binding.scrollView.requestLayout(), 500);
 
         Toast.makeText(requireContext(), "Downloaded", Toast.LENGTH_SHORT).show();
         binding.btPdf.setVisibility(View.VISIBLE);

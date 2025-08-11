@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rhythmapp.api.ApiService;
@@ -65,9 +66,10 @@ public class LoginActivity extends AppCompatActivity {
 
             apiResponseCall.enqueue(new Callback<ApiResponse<Patient>>() {
                 @Override
-                public void onResponse(Call<ApiResponse<Patient>> call, Response<ApiResponse<Patient>> response) {
+                public void onResponse(@NonNull Call<ApiResponse<Patient>> call, @NonNull Response<ApiResponse<Patient>> response) {
                     if (response.isSuccessful()){
                         ApiResponse<Patient> apiResponse = response.body();
+                        assert apiResponse != null;
                         if (apiResponse.getCount() == 1){
                             SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -93,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ApiResponse<Patient>> call, Throwable throwable) {
+                public void onFailure(@NonNull Call<ApiResponse<Patient>> call, @NonNull Throwable throwable) {
                     Log.e("api", "onFailure: ", throwable);
                 }
             });

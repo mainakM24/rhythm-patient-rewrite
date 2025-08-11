@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,7 +70,7 @@ public class MyDetailsFragment extends Fragment {
 
         patientApiResponseCall.enqueue(new Callback<ApiResponse<Patient>>() {
             @Override
-            public void onResponse(Call<ApiResponse<Patient>> call, Response<ApiResponse<Patient>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<Patient>> call, @NonNull Response<ApiResponse<Patient>> response) {
 
                 if (response.isSuccessful()){
                     ApiResponse<Patient> apiResponse = response.body();
@@ -86,14 +85,14 @@ public class MyDetailsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<Patient>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<Patient>> call, @NonNull Throwable throwable) {
                 Log.e("api", "onFailure: patient", throwable);
             }
         });
 
         doctorApiResponseCall.enqueue(new Callback<ApiResponse<Doctor>>() {
             @Override
-            public void onResponse(Call<ApiResponse<Doctor>> call, Response<ApiResponse<Doctor>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<Doctor>> call, @NonNull Response<ApiResponse<Doctor>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
 
@@ -109,14 +108,14 @@ public class MyDetailsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<Doctor>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<Doctor>> call, @NonNull Throwable throwable) {
                 Log.e("api", "onFailure: doctor", throwable);
             }
         });
 
         adviceApiResponseCall.enqueue(new Callback<ApiResponse<Advice>>() {
             @Override
-            public void onResponse(Call<ApiResponse<Advice>> call, Response<ApiResponse<Advice>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<Advice>> call, @NonNull Response<ApiResponse<Advice>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
                     adviceList = response.body().getItems();
@@ -128,7 +127,7 @@ public class MyDetailsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<Advice>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<Advice>> call, @NonNull Throwable throwable) {
                 Log.e("api", "onFailure: advice", throwable);
             }
         });
@@ -204,7 +203,7 @@ public class MyDetailsFragment extends Fragment {
         Call<ApiResponse<Advice>> adviceApiResponseCall = apiService.getLoggedAdvice(userId, LIMIT * ++limitMultiplier);
         adviceApiResponseCall.enqueue(new Callback<ApiResponse<Advice>>() {
             @Override
-            public void onResponse(Call<ApiResponse<Advice>> call, Response<ApiResponse<Advice>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<Advice>> call, @NonNull Response<ApiResponse<Advice>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
                     int oldSize = adviceList.size();
@@ -217,7 +216,7 @@ public class MyDetailsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<Advice>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<Advice>> call, @NonNull Throwable throwable) {
                 Log.e("api", "onFailure: advice", throwable);
             }
         });

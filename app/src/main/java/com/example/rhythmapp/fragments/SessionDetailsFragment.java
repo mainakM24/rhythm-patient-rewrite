@@ -5,7 +5,6 @@ import static android.content.Context.MODE_PRIVATE;
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,7 +28,6 @@ import com.example.rhythmapp.api.RetrofitClient;
 import com.example.rhythmapp.databinding.FragmentSessionDetailsBinding;
 import com.example.rhythmapp.models.ApiResponse;
 import com.example.rhythmapp.models.DetailedSession;
-import com.example.rhythmapp.models.Session;
 import com.example.rhythmapp.utils.PdfUtil;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -38,14 +36,11 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -76,7 +71,7 @@ public class SessionDetailsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSessionDetailsBinding.inflate(inflater, container, false);
 
@@ -116,7 +111,7 @@ public class SessionDetailsFragment extends Fragment {
 
         sessionApiResponseCall.enqueue(new Callback<ApiResponse<DetailedSession>>() {
             @Override
-            public void onResponse(Call<ApiResponse<DetailedSession>> call, Response<ApiResponse<DetailedSession>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<DetailedSession>> call, @NonNull Response<ApiResponse<DetailedSession>> response) {
                 if (!isAdded() || binding == null) return;
 
                 if (response.isSuccessful() && response.body() != null) {
@@ -133,7 +128,7 @@ public class SessionDetailsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<DetailedSession>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<DetailedSession>> call, @NonNull Throwable throwable) {
                 // Always check if fragment is still attached to context
                 if (!isAdded() || binding == null) return;
 
@@ -182,9 +177,7 @@ public class SessionDetailsFragment extends Fragment {
             tableRow.addView(textViews[i]);
         }
 
-        textViews[0].setOnClickListener(v -> {
-            navigateToGranularSessionFragment(detailedSession.hidstart_date, detailedSession.hidend_date);
-        });
+        textViews[0].setOnClickListener(v -> navigateToGranularSessionFragment(detailedSession.hidstart_date, detailedSession.hidend_date));
 
         binding.tlDetailedSessionList.addView(tableRow);
     }
@@ -363,9 +356,7 @@ public class SessionDetailsFragment extends Fragment {
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1232);
         PdfUtil.createPdfFromCurrentScreen(binding.scrollView);
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            binding.scrollView.requestLayout();
-        }, 500);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> binding.scrollView.requestLayout(), 500);
 
         Toast.makeText(requireContext(), "Downloaded", Toast.LENGTH_SHORT).show();
         binding.btPdf.setVisibility(View.VISIBLE);

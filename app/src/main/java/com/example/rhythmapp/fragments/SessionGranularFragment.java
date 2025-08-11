@@ -24,7 +24,6 @@ import com.example.rhythmapp.api.ApiService;
 import com.example.rhythmapp.api.RetrofitClient;
 import com.example.rhythmapp.databinding.FragmentSessionGranularBinding;
 import com.example.rhythmapp.models.ApiResponse;
-import com.example.rhythmapp.models.DetailedSession;
 import com.example.rhythmapp.models.EcgData;
 import com.example.rhythmapp.models.GranularSession;
 import com.example.rhythmapp.utils.PdfUtil;
@@ -43,7 +42,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -65,7 +63,7 @@ public class SessionGranularFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSessionGranularBinding.inflate(inflater, container, false);
 
@@ -107,7 +105,7 @@ public class SessionGranularFragment extends Fragment {
 
         gSessionResponseCall.enqueue(new Callback<ApiResponse<GranularSession>>() {
             @Override
-            public void onResponse(Call<ApiResponse<GranularSession>> call, Response<ApiResponse<GranularSession>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<GranularSession>> call, @NonNull Response<ApiResponse<GranularSession>> response) {
                 if (!isAdded() || binding == null) return;
 
                 if (response.isSuccessful() && response.body() != null) {
@@ -124,7 +122,7 @@ public class SessionGranularFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<GranularSession>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<GranularSession>> call, @NonNull Throwable throwable) {
                 if (!isAdded() || binding == null) return;
 
                 Log.e("api", "onFailure: granular", throwable);
@@ -171,9 +169,7 @@ public class SessionGranularFragment extends Fragment {
             tableRow.addView(textViews[i]);
         }
 
-        textViews[0].setOnClickListener(v -> {
-            fetchEcgData(granularSession.getHidstart_date(), granularSession.getHidend_date());
-        });
+        textViews[0].setOnClickListener(v -> fetchEcgData(granularSession.getHidstart_date(), granularSession.getHidend_date()));
 
         binding.tlGranularSessionList.addView(tableRow);
     }
@@ -333,7 +329,7 @@ public class SessionGranularFragment extends Fragment {
         Call<ApiResponse<EcgData>> ecgResponseCall = apiService.getEcgData(userId, sessionId, starTime, endTime);
         ecgResponseCall.enqueue(new Callback<ApiResponse<EcgData>>() {
             @Override
-            public void onResponse(Call<ApiResponse<EcgData>> call, Response<ApiResponse<EcgData>> response) {
+            public void onResponse(@NonNull Call<ApiResponse<EcgData>> call, @NonNull Response<ApiResponse<EcgData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ecgDataList = response.body().getItems();
                     addEcgGraph(ecgDataList);
@@ -347,7 +343,7 @@ public class SessionGranularFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<EcgData>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<ApiResponse<EcgData>> call, @NonNull Throwable throwable) {
 
                 Log.e("api", "onFailure: granular", throwable);
                 if (getContext() != null) {
@@ -415,9 +411,7 @@ public class SessionGranularFragment extends Fragment {
         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1232);
         PdfUtil.createPdfFromCurrentScreen(binding.scrollView);
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            binding.scrollView.requestLayout();
-        }, 500);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> binding.scrollView.requestLayout(), 500);
 
         Toast.makeText(requireContext(), "Downloaded", Toast.LENGTH_SHORT).show();
         binding.btPdf.setVisibility(View.VISIBLE);
