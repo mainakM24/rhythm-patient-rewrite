@@ -132,7 +132,7 @@ public class CheckReportFragment extends Fragment {
     }
 
     private void displayData() {
-        if (binding == null || sessionList == null) return;
+        if (binding == null || sessionList == null || sessionList.isEmpty()) return;
 
         // Clear existing rows first to prevent duplication
         for (int i = binding.tlSessionList.getChildCount() - 1; i > 0; i--) {
@@ -454,7 +454,7 @@ public class CheckReportFragment extends Fragment {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> binding.scrollView.requestLayout(), 500);
 
-        Toast.makeText(requireContext(), "Downloaded", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Downloaded at  Downloads/", Toast.LENGTH_SHORT).show();
         binding.btPdf.setVisibility(View.VISIBLE);
     }
 }
