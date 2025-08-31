@@ -1,15 +1,24 @@
 package com.example.rhythmapp.utils;
 
+import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 public class PdfUtil {
     public static void createPdfFromCurrentScreen(View view) {
@@ -29,7 +38,7 @@ public class PdfUtil {
         canvas.drawBitmap(screenBitmap, 0, 0, null);
         pdfDocument.finishPage(page);
 
-        savePdf(pdfDocument);
+        savePdf(view.getContext(), pdfDocument);
 
         pdfDocument.close();
         screenBitmap.recycle();
@@ -66,6 +75,44 @@ public class PdfUtil {
 
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void savePdf(Context context, PdfDocument pdfDocument) {
+        String filename = "Rhythm_Report" + System.currentTimeMillis() + ".pdf";
+
+        Uri collection;
+        collection = MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+        // collection = MediaStore.Files.getContentUri("external"); //for older api
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Downloads.DISPLAY_NAME, filename);
+        values.put(MediaStore.Downloads.MIME_TYPE, "application/pdf");
+        values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Rhythm");
+
+        Uri fileUri = context.getContentResolver().insert(collection, values);
+
+        assert fileUri != null;
+        try (OutputStream out = context.getContentResolver().openOutputStream(fileUri)) {
+            pdfDocument.writeTo(out);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            pdfDocument.close();
+        }
+
+        openPdf(context, fileUri);
+    }
+
+    private static void openPdf(Context context, Uri fileUri) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(fileUri, "application/pdf");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        try {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(context, "No PDF viewer installed", Toast.LENGTH_SHORT).show();
         }
     }
 }

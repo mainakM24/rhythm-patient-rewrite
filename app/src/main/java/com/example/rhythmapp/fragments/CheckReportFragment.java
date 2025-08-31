@@ -454,7 +454,7 @@ public class CheckReportFragment extends Fragment {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> binding.scrollView.requestLayout(), 500);
 
-        Toast.makeText(requireContext(), "Downloaded at  Downloads/", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Downloaded", Toast.LENGTH_SHORT).show();
         binding.btPdf.setVisibility(View.VISIBLE);
     }
 }
