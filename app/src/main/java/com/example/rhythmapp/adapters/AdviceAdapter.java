@@ -16,7 +16,7 @@ import java.util.List;
 
 public class AdviceAdapter extends RecyclerView.Adapter< AdviceAdapter.AdviceViewHolder > {
 
-    private List<Advice> adviceList;
+    private final List<Advice> adviceList;
 
     public AdviceAdapter(List<Advice> adviceList) {
         this.adviceList = adviceList;

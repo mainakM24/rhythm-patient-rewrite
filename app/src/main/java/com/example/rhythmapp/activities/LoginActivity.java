@@ -3,7 +3,10 @@ package com.example.rhythmapp.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -51,6 +54,10 @@ public class LoginActivity extends AppCompatActivity {
         //clicking sign in button
         binding.btSignIn.setOnClickListener(view -> {
 
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                binding.pbLoginProgressBar.setVisibility(View.VISIBLE);
+            }, 1000);
+
 
             binding.tilUsername.setError(null);
             binding.tilPassword.setError(null);
@@ -83,6 +90,10 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else {
+                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                                binding.pbLoginProgressBar.setVisibility(View.GONE);
+                            }, 1000);
+
                             binding.tilUsername.setErrorEnabled(true);
                             binding.tilPassword.setErrorEnabled(true);
 
@@ -99,6 +110,9 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("api", "onFailure: ", throwable);
                 }
             });
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                binding.pbLoginProgressBar.setVisibility(View.GONE);
+            }, 1000);
         });
     }
 }
